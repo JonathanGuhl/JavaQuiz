@@ -8,25 +8,26 @@
 </head>
 <!-- Initial Welcome Screen -->
 <body>
-    <div class="mainScreenContainer"> 
+    <div class="mainScreen"> 
         <div id="startScreen">
             <h1>Let's Test Your JavaScript Knowledge!</h1>
-                <button id="startQuiz">Start Quiz</button>
+                <button id="quizButton">Start Quiz</button>
                 <button id="highScores" onclick="showHighscore()">High Scores</button>
         </div>
 <!-- Quiz Questions and Potential Answers -->
         <div id="quizContainer">
             <div id="timer"></div>
-            <div id="questions"></div>
-                <button id="a" onclick="optionChosen('a')"></button>
-                <button id="b" onclick="optionChosen('b')"></button>
-                <button id="c" onclick="optionChosen('c')"></button>
-                <button id="d" onclick="optionChosen('d')"></button>
+            <div id="questionsIndex"><p>Question</p></div>
+                <button id="a" onclick="optionChosen('a')">A</button>
+                <button id="b" onclick="optionChosen('b')">B</button>
+                <button id="c" onclick="optionChosen('c')">C</button>
+                <button id="d" onclick="optionChosen('d')">D</button>
+            <div id="feedback"></div>
         </div>
 <!-- Presentation of Score -->
         <div id="endOfGameContainer">
             <div id="finalScore"></div>
-                <input id="scoreSave" name="Save" type="text" size="65" name="" placeholder="Enter your initials to save your score!">
+                <input id="scoreSave" name="Save" type="text" size="65" name="initials" placeholder="Enter your initials to save your score!">
                 <button id="scoreSubmit">Submit Score</button>
         </div>
 <!-- List of scores in the cache -->
@@ -39,10 +40,11 @@
             <div id="userScores"></div>
         </div>
 <!-- Play Again and Clear Scores Buttons -->
-        <div id="playAgain">
-            <button id="playAgain" onclick="restartQuiz()">Play Again</button>
-            <button id="clearScores" onclick="clearScores()"></button>
+        <div id="replay">
+            <button id="playAgain" onclick="replayQuiz()">Play Again</button>
+            <button id="clearScores" onclick="clearScores()">Clear Scores</button>
         </div>
     
     </div>
+    <script src="assets/script.js"></script>
 </body>
