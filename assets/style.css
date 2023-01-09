@@ -1,10 +1,162 @@
+:root {
+--font: Georgia, 'Times New Roman', Times, serif;
+}
+html {
+    background-color: black;
+}
+.mainScreen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 150rem;
+    margin: auto;
+}
 
+#startScreen {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
 
+h1 {
+    font-family: 'Brush Script', 'cursive';
+    color:white;
+    text-shadow: 1px 1px 5px yellowgreen;
+    font-size:45px;
+    display:flex;
+    flex-direction: wrap;
+}
 
-
-
+button {
+    font-family: var(--font);
+    background-color: rgb(8, 240, 8);
+    color:black;
+    text-align:center;
+    font-size:15px;
+    padding:10px;
+    width:180px;
+    align-items: center;
+    border-radius:30px;
+    justify-content: space-around;
+    margin:2px;
+}
 
 p {
-color:black;
-background-color: yellow;
+    color:white;
+    font-family:var(--font);
+    font-size:20px;
+    text-align:start;    
+}
+
+h3 {
+    font-family:var(--font);
+    color: white;
+    text-align:center;
+    font-size:10px;
+}
+
+#timer {
+    font-family:var(--font);
+    color:yellow;
+    padding:20px;
+    text-align:end;
+    font-size:30px;
+}
+
+ul {
+    color:white;
+    font-size:25px;
+    list-style-type:none;
+    padding:3px;
+    text-align:center;
+}
+#endOfGameContainer {
+    text-align:center;
+    flex-direction:column;
+    align-items:center;
+}
+
+input {
+    padding:10px;
+}
+
+#finalScore {
+    color:white;
+    font-size:30px;
+    text-shadow:2px 2px green;
+    padding:10px;
+}
+
+#scoreSubmit{
+    margin:10px;
+}
+
+#scoresPage {
+    color:white;
+    width:50%;
+}
+
+#scoresList {
+    display:flex;
+    width:100%;
+    color:white;
+    font-family: var(--font);
+}
+
+#scoresContainer {
+    margin:20px;
+    height: 100%;
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.nameList {
+    display:start;
+    float:left;
+    font-family: var(--font);
+    font-weight: bold;
+    color:white;
+    text-align:start;
+    
+
+}
+
+.scoreList {
+    display:end;
+    font-family: var(--font);
+    font-weight:bold;
+    color:white;
+    text-align:end;
+
+}
+
+li {
+    font-family:var(--font);
+    color:white;
+    font-size:25px;
+    font-weight:bold;
+    list-style-type: none;
+    display:inline-block;
+    text-align:center;
+}
+
+#scoreSave {
+    font-size: 10px;
+    list-style-type: none;
+    margin:20px;
+}
+
+.replayAndScores {
+    display:table-column;
+    align-items:center;
+    text-align:center;
+}
+/* quiz result game over high score end buttons hidden till activated */
+#quizContainer, #endOfGameContainer, #scoresContainer, #replay {
+    display:none;
 }

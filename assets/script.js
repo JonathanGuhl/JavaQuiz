@@ -1,4 +1,4 @@
-// Main Screen Global Variables ---- (ALL GLOBAL VARIABLES LINES 2-87) ----
+// Main Screen Global Variables ---- (ALL GLOBAL VARIABLES LINES 2-93) ----
 var startScreen = document.getElementById("startScreen");
 var startQuizButton = document.getElementById("quizButton");
 var highScoresEl = document.getElementById("highScores");
@@ -27,7 +27,7 @@ var userScoresEl = document.getElementById("userScores");
 var replayContainer = document.getElementById("replay");
 // Quiz Questions Array
 var quizQuestions = [{
-    question: "In how many ways a JavaScript code can be involved in an HTML file?",
+    question: "In what way would you involve JavaScript code in an HTML file?",
         answerA: "Inline",
         answerB: "Internal",
         answerC: "External",
@@ -41,11 +41,11 @@ var quizQuestions = [{
         answerD: "function",
         correctAnswer: "b"},
     {
-    question: "A JavaScript function is defined with the function keyword, followed by a name, followed by ___?",
-        answerA: "()",
-        answerB: "[]",
-        answerC: "{}",
-        answerD: "<>",
+    question: "A JavaScript function is executed with ___ after the name of the function",
+        answerA: "( )",
+        answerB: "[ ]",
+        answerC: "{ }",
+        answerD: "< >",
         correctAnswer: "a"},
     {
     question: "Which one isn't a Javascript Operator?",
@@ -99,7 +99,7 @@ function questionGenerator(){
         return showScore();
     } 
     var currentQuestion = quizQuestions[currentQuestionIndex];
-    questionsEl.innerHTML = currentQuestion.question;
+    questionsEl.innerHTML = "<ul>" + currentQuestion.question + "<ul>";
     answerA.innerHTML = currentQuestion.answerA;
     answerB.innerHTML = currentQuestion.answerB;
     answerC.innerHTML = currentQuestion.answerC;
@@ -115,7 +115,7 @@ function startQuiz(){
     //Timer
     timerInterval = setInterval(function() {
         timeLeft--;
-        timerEl.textContent = "Time left: " + timeLeft;
+        timerEl.textContent = "Time Left: " + timeLeft;
     
         if(timeLeft === 0) {
           clearInterval(timerInterval);
@@ -126,18 +126,16 @@ function startQuiz(){
 }
 // This function is the end page screen that displays your score after either completeing the quiz or upon timer run out
 function showScore(){
-    quizContainer.style.display = "none"
+    startScreen.style.display = "none";
+    quizContainer.style.display = "none";
     endOfGame.style.display = "flex";
     clearInterval(timerInterval);
     scoreSaveEl.value = "";
     finalScoreEl.innerHTML = "You got " + score + " out of " + quizQuestions.length + " correct!";
 }
 
-// On click of the submit button, we run the function highscore that saves and stringifies the array of high scores already saved in local stoage
-// as well as pushing the new user name and score into the array we are saving in local storage. Then it runs the function to show high scores.
+// 
 scoreSubmitEl.addEventListener("click", function highscore(){
-    
-    
     if(scoreSaveEl.value === "") {
         alert("Initials cannot be blank");
         return false;
@@ -146,7 +144,7 @@ scoreSubmitEl.addEventListener("click", function highscore(){
         var currentUser = scoreSaveEl.value.trim();
         var userScores = {
             name : currentUser,
-            score : score
+            score : score,
         };
     
         endOfGame.style.display = "none";
@@ -156,7 +154,7 @@ scoreSubmitEl.addEventListener("click", function highscore(){
         
         savedHighscores.push(userScores);
         localStorage.setItem("savedHighscores", JSON.stringify(savedHighscores));
-        (displayHighScores);
+        displayHighScores();
 
     }
     
@@ -166,39 +164,41 @@ scoreSubmitEl.addEventListener("click", function highscore(){
 function displayHighScores(){
     userNamesEl.innerHTML = "";
     userScoresEl.innerHTML = "";
-    var highscores = JSON.parse(localStorage.getItem("savedHighscores")) || [];
-    for (i=0; i<highscores.length; i++){
+    var localScores = JSON.parse(localStorage.getItem("savedHighscores")) || [];
+    for (i=0; i<localScores.length; i++){
         var newNameSpan = document.createElement("li");
         var newScoreSpan = document.createElement("li");
-        newNameSpan.textContent = highscores[i].name;
-        newScoreSpan.textContent = highscores[i].score;
+        newNameSpan.textContent = localScores[i].name;
+        newScoreSpan.textContent =localScores[i].score;
         userNamesEl.appendChild(newNameSpan);
         userScoresEl.appendChild(newScoreSpan);
     }
 }
 
 // 
-function showHighscore(){
+function showHighScore(){
+    startScreen.style.display = "none";
     quizContainer.style.display = "none";
     endOfGame.style.display = "none";
-    scoresContainer.style.display = "flex";
-    scoreSaveEl.style.display = "block";
+    scoresContainer.style.display = "inline-block";
+    scoreSaveEl.style.display = "column";
     replayContainer.style.display = "flex";
 
     displayHighScores();
 }
 
 // Clear Local Storage
-function clearScore(){
+function clearScores(){
     window.localStorage.clear();
-    highscoreDisplayName.textContent = "";
-    highscoreDisplayScore.textContent = "";
+    userNamesEl.textContent = "";
+    userScoresEl.textContent = "";
 }
 
 // Resets 
 function replayQuiz(){
     scoresContainer.style.display = "none";
     endOfGame.style.display = "none";
+    replayContainer.style.display ="none";
     startScreen.style.display = "flex";
     timeLeft = 60;
     score = 0;
@@ -211,19 +211,19 @@ function optionChosen(answer){
     answerFeedback.style.display = "block"
     let p = document.createElement("p");
     answerFeedback.appendChild(p);
-// Will hide feedback for answer after two seconds
+// Will hide feedback for answer after one second
     setTimeout(function(){
         p.style.display = "none";
-    }, 2000);
+    }, 1000);
 
-    if (answer === correct && currentQuestionIndex !== questionsIndex){
+    if (answer == correct && currentQuestionIndex !== questionsIndex){
         score++;
-        p.textContent = "Correct!";
+        p.textContent = "--Correct ✅";
         currentQuestionIndex++;
         questionGenerator();
     
-    }else if (answer !== correct && currentQuestionIndex !== questionsIndex){
-        p.textContent = "Incorrect!";
+    } else if (answer !== correct && currentQuestionIndex !== questionsIndex){
+        p.textContent = "--Incorrect ❌";
         timeLeft = timeLeft - 10; 
         currentQuestionIndex++;
         questionGenerator();
@@ -235,5 +235,10 @@ function optionChosen(answer){
 
 // This button starts the quiz!
 startQuizButton.addEventListener("click",startQuiz);
+highScoresEl.addEventListener("click",showHighScore);
+
+
+
+
 
 

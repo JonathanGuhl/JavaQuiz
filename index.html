@@ -11,13 +11,14 @@
     <div class="mainScreen"> 
         <div id="startScreen">
             <h1>Let's Test Your JavaScript Knowledge!</h1>
-                <button id="quizButton">Start Quiz</button>
-                <button id="highScores" onclick="showHighscore()">High Scores</button>
+                <button id="quizButton" class="mainButtons">Start Quiz</button>
+                <button id="highScores" class="mainButtons">High Scores</button>
         </div>
 <!-- Quiz Questions and Potential Answers -->
         <div id="quizContainer">
             <div id="timer"></div>
-            <div id="questionsIndex"><p>Question</p></div>
+            <div id="questionsIndex">
+                <h2>Question</h2></div>
                 <button id="a" onclick="optionChosen('a')">A</button>
                 <button id="b" onclick="optionChosen('b')">B</button>
                 <button id="c" onclick="optionChosen('c')">C</button>
@@ -31,19 +32,21 @@
                 <button id="scoreSubmit">Submit Score</button>
         </div>
 <!-- List of scores in the cache -->
+    <div id="replayAndScores">
         <div id="scoresContainer">
-            <div id="scoresList" class="scores">
-                <h2>UserName</h2>
-                <h2>Score</h2>
-            </div>
-            <div id="userNames"></div>
-            <div id="userScores"></div>
+            <div id="scoresPage">
+                <div id="scoresList" class="scores">
+                     <div class="nameList" id="userNames"><ul>UserName</ul></div>
+                     <div class="scoreList" id="userScores"><ul>Score</ul></div>
+                </div>
+            </div>    
         </div>
 <!-- Play Again and Clear Scores Buttons -->
         <div id="replay">
             <button id="playAgain" onclick="replayQuiz()">Play Again</button>
             <button id="clearScores" onclick="clearScores()">Clear Scores</button>
         </div>
+    </div>
     
     </div>
     <script src="assets/script.js"></script>
