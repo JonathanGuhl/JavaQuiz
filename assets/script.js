@@ -106,7 +106,7 @@ function questionGenerator(){
     answerD.innerHTML = currentQuestion.answerD;
 };
 
-// Start Quiz function starts the TimeRanges, hides the start button, and displays the first quiz question.
+// Start Quiz function, hides the start button and scores button, and displays the first quiz question.
 function startQuiz(){
     endOfGame.style.display = "none";
     startScreen.style.display = "none";
@@ -124,7 +124,7 @@ function startQuiz(){
       }, 1000);
     quizContainer.style.display = "block";
 }
-// This function is the end page screen that displays your score after either completeing the quiz or upon timer run out
+// Function to display how well you did on the Quiz when the quiz is done
 function showScore(){
     startScreen.style.display = "none";
     quizContainer.style.display = "none";
@@ -134,10 +134,10 @@ function showScore(){
     finalScoreEl.innerHTML = "You got " + score + " out of " + quizQuestions.length + " correct!";
 }
 
-// 
+// Getting scores and usernames from local storage to display
 scoreSubmitEl.addEventListener("click", function highscore(){
     if(scoreSaveEl.value === "") {
-        alert("Initials cannot be blank");
+        alert("Submission can not be blank");
         return false;
     } else {
         var savedHighscores = JSON.parse(localStorage.getItem("savedHighscores")) || [];
@@ -194,7 +194,7 @@ function clearScores(){
     userScoresEl.textContent = "";
 }
 
-// Resets 
+// Resets the variables, hides start screen, end of game screen, scores, and runs the quiz.
 function replayQuiz(){
     scoresContainer.style.display = "none";
     endOfGame.style.display = "none";
@@ -215,7 +215,7 @@ function optionChosen(answer){
     setTimeout(function(){
         p.style.display = "none";
     }, 1000);
-
+// Verifying if the User selected the correct answer
     if (answer == correct && currentQuestionIndex !== questionsIndex){
         score++;
         p.textContent = "--Correct ✅";
@@ -233,7 +233,7 @@ function optionChosen(answer){
     }
 }
 
-// This button starts the quiz!
+// Start Screen buttons
 startQuizButton.addEventListener("click",startQuiz);
 highScoresEl.addEventListener("click",showHighScore);
 
